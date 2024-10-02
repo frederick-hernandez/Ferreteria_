@@ -1,0 +1,87 @@
+<div class="container my-5">
+  <h1 class="text-center mb-4 text-primary">Lista de Clientes</h1>
+  <div class="table-responsive">
+    <nav class="navbar bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand">Buscar Cliente</a>
+        <form class="d-flex" (ngSubmit)="buscarEmpleado(buscarId.value)">
+          <input #buscarId class="form-control me-2" type="number" placeholder="Buscar por ID" aria-label="Buscar por ID">
+          <button class="btn btn-outline-success" type="submit">Buscar</button>
+        </form>
+      </div>
+    </nav>
+    <table class="table table-hover table-bordered shadow-sm">
+      <thead class="table-primary">
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Teléfono</th>
+          <th scope="col">Salario</th>
+          <th scope="col">Email</th>
+          <th scope="col">Área</th>
+          <th scope="col">Status</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of EmpList; trackBy: trackByIndex">
+          <th scope="row">{{ item.id }}</th>
+          <td>{{ item.nombre }}</td>
+          <td>{{ item.apellido }}</td>
+          <td>{{ item.telefono }}</td>
+          <td>{{ item.salario }}</td>
+          <td>{{ item.email }}</td>
+          <td>{{ item.area_id }}</td>
+          <td>{{ item.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-primary" (click)="toggleFormulario()">Agregar Cliente</button>
+  </div>
+
+  <div class="floating-form" *ngIf="mostrarFormulario">
+    <h2>Crear Nuevo Empleado</h2>
+    <form (ngSubmit)="crearEmpleado()">
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="nombre" [(ngModel)]="nuevoEmpleado.nombre" name="nombre" required>
+      </div>
+      <div class="mb-3">
+        <label for="apellido" class="form-label">Apellido</label>
+        <input type="text" class="form-control" id="apellido" [(ngModel)]="nuevoEmpleado.apellido" name="apellido" required>
+      </div>
+      <div class="mb-3">
+        <label for="direccion" class="form-label">direccion</label>
+        <input type="text" class="form-control" id="telefono" [(ngModel)]="nuevoEmpleado.direccion" name="direccion" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="telefono" class="form-label">Teléfono</label>
+        <input type="text" class="form-control" id="telefono" [(ngModel)]="nuevoEmpleado.telefono" name="telefono" required>
+      </div>
+      <div class="mb-3">
+        <label for="salario" class="form-label">Salario</label>
+        <input type="number" class="form-control" id="salario" [(ngModel)]="nuevoEmpleado.salario" name="salario" required>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" [(ngModel)]="nuevoEmpleado.email" name="email" required>
+      </div>
+      <div class="mb-3">
+        <label for="area_id" class="form-label">Área</label>
+        <input type="number" class="form-control" id="area_id" [(ngModel)]="nuevoEmpleado.area_id" name="area_id" required>
+      </div>
+      <div class="mb-3">
+        <label for="status" class="form-label">Status</label>
+        <select class="form-control" id="status" [(ngModel)]="nuevoEmpleado.status" name="status" required>
+          <option value="Activo">Activo</option>
+          <option value="Inactivo">Inactivo</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Crear Empleado</button>
+      <button type="button" class="btn btn-secondary" (click)="toggleFormulario()">Cerrar</button>
+    </form>
+  </div>
+</div>
+
