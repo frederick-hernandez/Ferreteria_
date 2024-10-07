@@ -23,4 +23,7 @@ export class EmpleadosService {
     return this.http.post<EmpInterfaces>(`${this.apiUrl}`+'/create',empleado);
   }
 
+  updateEmpleado(id: number, empleado: EmpInterfaces): Observable<EmpInterfaces> {
+    return this.http.put<EmpInterfaces>(`https://ferreteria-api.onrender.com/api/v1/empleado/update/${id}`, empleado);
+  }
 }

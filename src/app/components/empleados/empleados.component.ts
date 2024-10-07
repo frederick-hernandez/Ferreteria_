@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 export class EmpleadosComponent implements OnInit {
   EmpList: EmpInterfaces[] = [];
   empleado: EmpInterfaces | undefined;
+  empleadoEditando: EmpInterfaces | null = null;
   nuevoEmpleado: EmpInterfaces = {
     id: 0,
     nombre: '',
@@ -37,6 +38,26 @@ export class EmpleadosComponent implements OnInit {
   handleKeydown(event: KeyboardEvent): void {
     if (this.mostrarFormulario) {
       this.toggleFormulario();
+    }
+  }
+
+  editarEmpleado(empleado: EmpInterfaces): void {
+    this.empleadoEditando = { ...empleado };
+    console.log(this.empleadoEditando);
+  }
+
+  actualizarEmpleado(): void {
+    console.log('Actualizar empleado:', this.empleadoEditando); // Verificar si el método se llama
+    if (this.empleadoEditando) {
+      this.empService.updateEmpleado(this.empleadoEditando.id, this.empleadoEditando).subscribe({
+        next: () => {
+          this.getEmpleados(); // Actualizar la lista de empleados
+          this.empleadoEditando = null; // Limpiar el formulario
+        },
+        error: (err) => {
+          console.log('Error al actualizar el empleado:', err);
+        }
+      });
     }
   }
   getEmpleados(): void {
@@ -73,6 +94,7 @@ export class EmpleadosComponent implements OnInit {
   }
 
   crearEmpleado(): void {
+    console.log('Crear empleado:'); // Verificar si el método se llama
     this.empService.createEmpleado(this.nuevoEmpleado).subscribe({
       next: (result) => {
         console.log('Empleado creado:', result);
@@ -100,6 +122,7 @@ export class EmpleadosComponent implements OnInit {
   }
 
   toggleFormulario(): void {
+    console.log('adasda');
     this.mostrarFormulario = !this.mostrarFormulario;
   }
 

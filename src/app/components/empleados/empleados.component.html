@@ -16,6 +16,7 @@
           <th scope="col">Id</th>
           <th scope="col">Nombre</th>
           <th scope="col">Apellido</th>
+          <th scope="col">direccion</th>
           <th scope="col">Teléfono</th>
           <th scope="col">Salario</th>
           <th scope="col">Email</th>
@@ -29,15 +30,19 @@
           <th scope="row">{{ item.id }}</th>
           <td>{{ item.nombre }}</td>
           <td>{{ item.apellido }}</td>
+          <td>{{item.direccion}}</td>
           <td>{{ item.telefono }}</td>
           <td>{{ item.salario }}</td>
           <td>{{ item.email }}</td>
           <td>{{ item.area_id }}</td>
           <td>{{ item.status }}</td>
+          <td>
+            <button (click)="editarEmpleado(item)">Editar</button>
+          </td>
         </tr>
       </tbody>
     </table>
-    <button class="btn btn-primary" (click)="toggleFormulario()">Agregar Cliente</button>
+    <button class="btn btn-primary" (click)="toggleFormulario()">Agregar empleado</button>
   </div>
 
   <div class="floating-form" *ngIf="mostrarFormulario">
@@ -79,9 +84,46 @@
           <option value="Inactivo">Inactivo</option>
         </select>
       </div>
-      <button type="submit" class="btn btn-primary">Crear Empleado</button>
+      <button type="submit" class="btn btn-primary">Guardar</button>
       <button type="button" class="btn btn-secondary" (click)="toggleFormulario()">Cerrar</button>
     </form>
   </div>
 </div>
 
+<div *ngIf="empleadoEditando">
+  <form (ngSubmit)="actualizarEmpleado()">
+    <label>
+      Nombre:
+      <input [(ngModel)]="empleadoEditando.nombre" name="nombre">
+    </label>
+    <label>
+      Apellido:
+      <input [(ngModel)]="empleadoEditando.apellido" name="apellido">
+    </label>
+    <label>
+      Dirección:
+      <input [(ngModel)]="empleadoEditando.direccion" name="direccion">
+    </label>
+    <label>
+      Teléfono:
+      <input [(ngModel)]="empleadoEditando.telefono" name="telefono">
+    </label>
+    <label>
+      Salario:
+      <input [(ngModel)]="empleadoEditando.salario" name="salario">
+    </label>
+    <label>
+      Email:
+      <input [(ngModel)]="empleadoEditando.email" name="email">
+    </label>
+    <label>
+      Área ID:
+      <input [(ngModel)]="empleadoEditando.area_id" name="area_id">
+    </label>
+    <label>
+      Status:
+      <input [(ngModel)]="empleadoEditando.status" name="status">
+    </label>
+    <button type="ngsubmit">Guardar cambios</button>
+  </form>
+</div>
