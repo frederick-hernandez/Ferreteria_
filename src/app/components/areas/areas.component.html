@@ -1,9 +1,9 @@
 <div class="container my-5">
-    <h1 class="text-center mb-4 text-primary">Lista de Clientes</h1>
+    <h1 class="text-center mb-4 text-primary">Lista de Areas</h1>
     <div class="table-responsive">
       <nav class="navbar bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand">Buscar Cliente</a>
+          <a class="navbar-brand">Buscar area</a>
           <form class="d-flex">
             <input #buscarId class="form-control me-2" type="number" placeholder="Buscar por ID" aria-label="Buscar por ID">
             <button class="btn btn-outline-success" type="submit">Buscar</button>
@@ -16,6 +16,7 @@
             <th scope="col">Id</th>
             <th scope="col">nombre_area</th>
             <th scope="col">porcentaje_comision</th>
+            <th scope="col">acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -24,8 +25,8 @@
             <td>{{ item.nombre_area }}</td>
             <td>{{item.porcentaje_comision}}</td>
             <td>
-              <button (click)="editarArea(item)">Editar</button>
-            <button (click)="eliminarArea(item.id)">Eliminar</button>
+              <button class="btn btn-secondary"      (click)="editarArea(item)">Editar</button>
+            <button class="btn btn-danger"  (click)="eliminarArea(item.id)">Eliminar</button>
             </td>
           </tr>
         </tbody>
@@ -34,7 +35,7 @@
     </div>
 
     <div class="floating-form" *ngIf="mostrarFormulario">
-        <h2 *ngIf="!editando">Crear Nueva Área</h2>
+        <h2 *ngIf="editando==false">Crear Nueva Área</h2>
         <h2 *ngIf="editando">Editar Área</h2>
         <form (ngSubmit)="guardarArea()">
           <div class="mb-3">
@@ -43,10 +44,12 @@
           </div>
           <div class="mb-3">
             <label for="apellido" class="form-label">porcentaje_comision</label>
-            <input type="text" class="form-control" id="porcentaje_comision" [(ngModel)]="nuevoArea.porcentaje_comision" name="apellido" required>
+            <input type="number" class="form-control" id="porcentaje_comision" [(ngModel)]="nuevoArea.porcentaje_comision" name="apellido" required>
           </div>
           <button type="submit" class="btn btn-primary">Guardar</button>
           <button type="button" class="btn btn-secondary" (click)="toggleFormulario()">Cerrar</button>
         </form>
       </div>
     </div>
+
+    

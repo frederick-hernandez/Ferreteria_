@@ -23,15 +23,25 @@ export class ClientesComponent {
   getClients(): void {
     this._clientService.getClientes().subscribe({
       next: (result) => {
-        console.log('Respuesta completa:', result); // Imprime toda la respuesta
-        this.clientList = result.clientes; // Asigna los datos a clientList
-        console.log('Lista de clientes asignada:', this.clientList); // Verifica la lista asignada
-        this.cd.detectChanges(); // Forzar la actualización de la vista
+        console.log('Respuesta completa:', result);
+        this.clientList = result.clientes; 
+        console.log('Lista de clientes asignada:', this.clientList);
 
       },
       error: (err) => {
         console.log('Error al obtener los clientes:', err);
       }
     });
+  }
+  
+  
+  eliminarCliente(id: number): void {
+    this._clientService.deleteCliente(id).subscribe(() => {
+      this.getClients();
+    });
+  }
+
+  trackByIndex(index: number, item: any): any {
+    return index;
   }
 }

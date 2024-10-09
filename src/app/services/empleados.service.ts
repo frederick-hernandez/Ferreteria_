@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EmpInterfaces } from '../interfaces/empleados.interfaces';
-
+import {empsinID} from '../interfaces/empsinId';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,15 +15,15 @@ export class EmpleadosService {
     return this.http.get<any>(this.apiUrl +'/findall');
   }
 
-  getEmpleadoById(id: number): Observable<EmpInterfaces> {
-    return this.http.get<EmpInterfaces>(`${this.apiUrl}/findbyid/${id}`);
-  }
-
   createEmpleado(empleado: EmpInterfaces): Observable<EmpInterfaces> {
     return this.http.post<EmpInterfaces>(`${this.apiUrl}`+'/create',empleado);
   }
 
-  updateEmpleado(id: number, empleado: EmpInterfaces): Observable<EmpInterfaces> {
-    return this.http.put<EmpInterfaces>(`https://ferreteria-api.onrender.com/api/v1/empleado/update/${id}`, empleado);
+  updateEmpleado(id: number, empleado: empsinID): Observable<empsinID> {
+    return this.http.put<empsinID>(`https://ferreteria-api.onrender.com/api/v1/empleado/update/${id}`, empleado);
+  }
+  
+  deleteEmpleado(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
   }
 }

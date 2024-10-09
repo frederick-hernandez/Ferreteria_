@@ -3,7 +3,6 @@ import { AreaService} from '../../services/area.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AreaInterfaces } from '../../interfaces/Areas.interfaces';
-
 @Component({
   selector: 'app-areas',
   templateUrl: './areas.component.html',
@@ -21,7 +20,6 @@ export class AreasComponent implements OnInit {
     nombre_area: '',
     porcentaje_comision: ''
   };
-
   areaEditando: AreaInterfaces | null = null;
 
   constructor(private areaService: AreaService) {}
@@ -76,7 +74,6 @@ export class AreasComponent implements OnInit {
           });
         }
       }
-
   eliminarArea(id: number): void {
     this.areaService.deleteArea(id).subscribe(() => {
       this.getAreas();
