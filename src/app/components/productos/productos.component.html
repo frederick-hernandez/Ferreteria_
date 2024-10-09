@@ -1,0 +1,65 @@
+<div class="container my-5">
+    <h1 class="text-center mb-4 text-primary">Lista de Areas</h1>
+    <div class="table-responsive">
+      <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand">Buscar area</a>
+          <form class="d-flex">
+            <input #buscarId class="form-control me-2" type="number" placeholder="Buscar por ID" aria-label="Buscar por ID">
+            <button class="btn btn-outline-success" type="submit">Buscar</button>
+          </form>
+        </div>
+      </nav>
+      <table class="table table-hover table-bordered shadow-sm">
+        <thead class="table-primary">
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">nombre</th>
+            <th scope="col">precio_actual</th>
+            <th scope="col">precio_costo</th>
+            <th scope="col">proveedor_id</th>
+            <th scope="col">Acciones</th> 
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of productos; trackBy: trackByIndex">
+            <th scope="row">{{ item.id }}</th>
+            <td>{{ item.nombre }}</td>
+            <td>{{item.precio_actual}}</td>
+            <td>{{item.precio_costo}}</td>
+            <td>{{item.proveedor_id}}</td>
+            <td>
+              <button class="btn btn-secondary" (click)="editarProducto(item.id,item)" >Editar</button>
+            <button class="btn btn-danger"  (click)="eliminarProducto(item.id)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-primary" (click)="toggleFormulario()">agregar Producto</button>
+    </div>
+
+    <div class="floating-form" *ngIf="mostrarFormulario">
+        <h2 *ngIf="editando==false">Crear Nueva Área</h2>
+        <h2 *ngIf="editando">Editar Área</h2>
+        <form (ngSubmit)="guardarProducto()">
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" [(ngModel)]="nuevoProducto.nombre" name="nombre" required>
+          </div>
+          <div class="mb-3">
+            <label for="precio_actual" class="form-label">precio_actual</label>
+            <input type="number" class="form-control" id="porcentaje_comision" [(ngModel)]="nuevoProducto.precio_actual" name="apellido" required>
+          </div>
+          <div>
+            <label for="precio_costo" class="form-label">precio_costo</label>
+            <input type="number" class="form-control" id="apellido" [(ngModel)]="nuevoProducto.precio_costo" name="apellido" required>
+          </div>
+          <div>
+            <label for="proveedor_id" class="form-label">proveedor_id</label>
+            <input type="number" class="form-control" id="apellido" [(ngModel)]="nuevoProducto.proveedor_id" name="apellido" required>
+          </div>
+          <button type="submit" class="btn btn-primary" >Guardar</button>
+          <button type="button" class="btn btn-secondary" (click)="toggleFormulario()">Cerrar</button>
+        </form>
+      </div>
+    </div>

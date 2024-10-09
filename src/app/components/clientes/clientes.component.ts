@@ -12,7 +12,7 @@ import { EmpleadosComponent } from '../empleados/empleados.component';
   styleUrl: './clientes.component.css'
 })
 export class ClientesComponent {
-  clientList: listaclientes[] = []; // Inicializa la lista de clientes
+  clientList: listaclientes[] = [];
 
   constructor(private _clientService: ClientesService, private cd: ChangeDetectorRef) {}
 

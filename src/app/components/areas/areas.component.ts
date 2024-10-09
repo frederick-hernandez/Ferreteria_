@@ -20,7 +20,6 @@ export class AreasComponent implements OnInit {
     nombre_area: '',
     porcentaje_comision: ''
   };
-  areaEditando: AreaInterfaces | null = null;
 
   constructor(private areaService: AreaService) {}
 

@@ -4,6 +4,7 @@ import { ClientesComponent } from './components/clientes/clientes.component';
 import { ProveedoresComponent } from './components/proveedores/proveedores.component';
 import { EmpleadosComponent } from './components/empleados/empleados.component';
 import { AreasComponent } from './components/areas/areas.component';
+import { ProductosComponent } from './components/productos/productos.component';
 
 export const routes: Routes = [
     {
@@ -25,5 +26,9 @@ export const routes: Routes = [
     {
         path: 'areas',
         component: AreasComponent
+    },
+    {
+        path: 'productos',
+        component: ProductosComponent
     }
 ];
