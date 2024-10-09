@@ -23,7 +23,7 @@
         </thead>
         <tbody>
           <tr *ngIf="clientList.length === 0">
-            <td colspan="4" class="text-center">No hay clientes disponibles</td>
+            <td colspan="4" class="text-center">No hay clientes disponibles</td>// ejemplo de un commit despues
           </tr>
           <tr *ngFor="let item of clientList; trackBy: trackByIndex">
             <th scope="row">{{ item.id }}</th>
