@@ -127,11 +127,13 @@ export class EmpleadosComponent implements OnInit {
       area_id: '',
       status: '',
     };
+    this.editando = false;
   }
 
   toggleFormulario(): void {
     console.log('adasda');
     this.mostrarFormulario = !this.mostrarFormulario;
+    this.resetFormulario();
   }
 
   trackByIndex(index: number, item: any): any {

@@ -35,7 +35,6 @@ export class ProductosComponent implements OnInit {
     }
   }
 
-
   getProductos(): void {
     this.Pservice.getProductos().subscribe({
       next: (result) => {
@@ -50,6 +49,7 @@ export class ProductosComponent implements OnInit {
   }
 
   crearProducto(): void {
+    this.toggleFormulario();
     this.Pservice.crearProductos(this.nuevoProducto).subscribe(() => {
       this.getProductos();
       this.resetFormulario();
@@ -69,6 +69,7 @@ export class ProductosComponent implements OnInit {
   guardarProducto(): void {
     if (this.editando) {
       this.actualizarProducto();
+      this.editando = false;
     } else {
       this.crearProducto();
     }
@@ -100,11 +101,11 @@ export class ProductosComponent implements OnInit {
       precio_costo: 0
     };
     this.editando = false;
-    this.mostrarFormulario = false;
   }
   toggleFormulario(): void {
     console.log("hola");
     this.mostrarFormulario =!this.mostrarFormulario;
+    this.resetFormulario();
   }
 
   trackByIndex(index: number, item: any): any {

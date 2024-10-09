@@ -1,1 +1,66 @@
-<p>proveedores works!</p>
+<div class="container my-5">
+    <h1 class="text-center mb-4 text-primary">Lista de Proveedores</h1>
+    <div class="table-responsive">
+      <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand">Buscar Proveedor</a>
+          <form class="d-flex" (ngSubmit)="buscarProveedor(buscarId.value)">
+            <input #buscarId class="form-control me-2" type="number" placeholder="Buscar por ID" aria-label="Buscar por ID">
+            <button class="btn btn-outline-success" type="submit">Buscar</button>
+          </form>
+        </div>
+      </nav>
+      <table class="table table-hover table-bordered shadow-sm">
+        <thead class="table-primary">
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Dirección</th>
+            <th scope="col">Teléfono</th>
+            <th scope="col">Contacto</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of proveedorList; trackBy: trackByIndex">
+            <th scope="row">{{ item.id }}</th>
+            <td>{{ item.nombre }}</td>
+            <td>{{ item.direccion }}</td>
+            <td>{{ item.telefono }}</td>
+            <td>{{ item.contacto }}</td>
+            <td>
+              <button class="btn btn-warning" (click)="editarProveedor(item.id,item)">Editar</button>
+              <button class="btn btn-danger" (click)="eliminarProveedor(item.id)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-primary" (click)="toggleFormulario()">Agregar Proveedor</button>
+    </div>
+  
+    <div class="floating-form" *ngIf="mostrarFormulario">
+        <h2 *ngIf="editando==false">Crear Nuevo Proveedor</h2>
+        <h2 *ngIf="editando">Editar Proveedor</h2>
+      <form (ngSubmit)="guardarProveedor()">
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="nombre" [(ngModel)]="nuevoProveedor.nombre" name="nombre" required>
+        </div>
+        <div class="mb-3">
+          <label for="direccion" class="form-label">Dirección</label>
+          <input type="text" class="form-control" id="direccion" [(ngModel)]="nuevoProveedor.direccion" name="direccion" required>
+        </div>
+        <div class="mb-3">
+          <label for="telefono" class="form-label">Teléfono</label>
+          <input type="text" class="form-control" id="telefono" [(ngModel)]="nuevoProveedor.telefono" name="telefono" required>
+        </div>
+        <div class="mb-3">
+          <label for="contacto" class="form-label">Contacto</label>
+          <input type="text" class="form-control" id="contacto" [(ngModel)]="nuevoProveedor.contacto" name="contacto" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Crear Proveedor</button>
+        <button type="button" class="btn btn-secondary" (click)="toggleFormulario()">Cerrar</button>
+      </form>
+    </div>
+  </div>
+  
