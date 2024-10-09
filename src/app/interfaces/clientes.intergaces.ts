@@ -1,6 +1,6 @@
 
 export interface listaclientes {
-    id: string;
+    id: number;
     nombre: string;
     email: string;
     status: string;

@@ -3,6 +3,7 @@ import { BarraLateralComponent } from './components/barra-lateral/barra-lateral.
 import { ClientesComponent } from './components/clientes/clientes.component';
 import { ProveedoresComponent } from './components/proveedores/proveedores.component';
 import { EmpleadosComponent } from './components/empleados/empleados.component';
+import { AreasComponent } from './components/areas/areas.component';
 
 export const routes: Routes = [
     {
@@ -20,5 +21,9 @@ export const routes: Routes = [
     {
         path:'empleados',
         component: EmpleadosComponent
+    },
+    {
+        path: 'areas',
+        component: AreasComponent
     }
 ];

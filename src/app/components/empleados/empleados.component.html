@@ -1,10 +1,10 @@
 <div class="container my-5">
-  <h1 class="text-center mb-4 text-primary">Lista de Clientes</h1>
+  <h1 class="text-center mb-4 text-primary">Lista de empleados</h1>
   <div class="table-responsive">
     <nav class="navbar bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand">Buscar Cliente</a>
-        <form class="d-flex" (ngSubmit)="buscarEmpleado(buscarId.value)">
+        <a class="navbar-brand">Buscar empleado</a>
+        <form class="d-flex" >
           <input #buscarId class="form-control me-2" type="number" placeholder="Buscar por ID" aria-label="Buscar por ID">
           <button class="btn btn-outline-success" type="submit">Buscar</button>
         </form>
@@ -16,6 +16,7 @@
           <th scope="col">Id</th>
           <th scope="col">Nombre</th>
           <th scope="col">Apellido</th>
+          <th scope="col">direccion</th>
           <th scope="col">Teléfono</th>
           <th scope="col">Salario</th>
           <th scope="col">Email</th>
@@ -29,20 +30,26 @@
           <th scope="row">{{ item.id }}</th>
           <td>{{ item.nombre }}</td>
           <td>{{ item.apellido }}</td>
+          <td>{{item.direccion}}</td>
           <td>{{ item.telefono }}</td>
           <td>{{ item.salario }}</td>
           <td>{{ item.email }}</td>
           <td>{{ item.area_id }}</td>
           <td>{{ item.status }}</td>
+          <td>
+            <button  class="btn btn-secondary"    (click)="editarEmpleado(item)">Editar</button>
+            <button  class="btn btn-danger"    (click)="eliminarEmpleado(item.id)">Eliminar</button>
+          </td>
         </tr>
       </tbody>
     </table>
-    <button class="btn btn-primary" (click)="toggleFormulario()">Agregar Cliente</button>
+    <button class="btn btn-primary" (click)="toggleFormulario()">Agregar empleado</button>
   </div>
 
   <div class="floating-form" *ngIf="mostrarFormulario">
-    <h2>Crear Nuevo Empleado</h2>
-    <form (ngSubmit)="crearEmpleado()">
+    <h2 *ngIf="editando==false">Crear Nueva Área</h2>
+    <h2 *ngIf="editando">Editar Área</h2>
+    <form (ngSubmit)="guardarEmp()">
       <div class="mb-3">
         <label for="nombre" class="form-label">Nombre</label>
         <input type="text" class="form-control" id="nombre" [(ngModel)]="nuevoEmpleado.nombre" name="nombre" required>
@@ -79,9 +86,46 @@
           <option value="Inactivo">Inactivo</option>
         </select>
       </div>
-      <button type="submit" class="btn btn-primary">Crear Empleado</button>
+      <button type="submit" class="btn btn-primary">Guardar</button>
       <button type="button" class="btn btn-secondary" (click)="toggleFormulario()">Cerrar</button>
     </form>
   </div>
 </div>
 
+<div *ngIf="empleadoEditando">
+  <form (ngSubmit)="actualizarEmpleado()">
+    <label>
+      Nombre:
+      <input [(ngModel)]="empleadoEditando.nombre" name="nombre">
+    </label>
+    <label>
+      Apellido:
+      <input [(ngModel)]="empleadoEditando.apellido" name="apellido">
+    </label>
+    <label>
+      Dirección:
+      <input [(ngModel)]="empleadoEditando.direccion" name="direccion">
+    </label>
+    <label>
+      Teléfono:
+      <input [(ngModel)]="empleadoEditando.telefono" name="telefono">
+    </label>
+    <label>
+      Salario:
+      <input [(ngModel)]="empleadoEditando.salario" name="salario">
+    </label>
+    <label>
+      Email:
+      <input [(ngModel)]="empleadoEditando.email" name="email">
+    </label>
+    <label>
+      Área ID:
+      <input [(ngModel)]="empleadoEditando.area_id" name="area_id">
+    </label>
+    <label>
+      Status:
+      <input [(ngModel)]="empleadoEditando.status" name="status">
+    </label>
+    <button type="ngsubmit">Guardar cambios</button>
+  </form>
+</div>
