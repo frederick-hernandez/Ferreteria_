@@ -1,11 +1,10 @@
 <div class="sidebar">
-    <a href="">Inicio</a>
+    <a href="" >Inicio</a>
     <a routerLink="/clientes">Clientes</a>
     <a routerLink="/proveedores">proveedores</a>
     <a routerLink="/empleados">Empleados</a>
     <a routerLink="/areas">areas</a>
     <a routerLink="/productos">Productos</a>
+    <a (click)="logout()"> Logout</a>
   </div>
-  <div class="main-content">
-  <router-outlet></router-outlet>
-  </div>
+  <div class="main-content"> <router-outlet></router-outlet></div>

@@ -5,12 +5,11 @@ import { ProveedoresComponent } from './components/proveedores/proveedores.compo
 import { EmpleadosComponent } from './components/empleados/empleados.component';
 import { AreasComponent } from './components/areas/areas.component';
 import { ProductosComponent } from './components/productos/productos.component';
+import { SingUpComponent } from './components/sing-up/sing-up.component';
+import { LoginComponent } from './components/login/login.component';
 
 export const routes: Routes = [
-    {
-        path: 'barra',
-        component: BarraLateralComponent
-    },
+    { path: 'home', component: BarraLateralComponent },
     {
         path : 'clientes',
         component: ClientesComponent
@@ -30,5 +29,21 @@ export const routes: Routes = [
     {
         path: 'productos',
         component: ProductosComponent
-    }
+    },
+
+    {
+        path:'auth',
+        children: [
+            {
+                path:'signup',
+                component: SingUpComponent
+            },
+            {
+                path:'login',
+                component: LoginComponent
+            }]
+    },
+    { path: '', redirectTo: '', pathMatch: 'full' },
+    { path: '**', redirectTo: '' }
+
 ];

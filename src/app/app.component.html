@@ -1,7 +1,8 @@
 
-<!--                                
-<app-barra-lateral></app-barra-lateral>
 
--->
+<app-barra-lateral *ngIf="user$|async as user ; else loginTemplate"></app-barra-lateral>
 
-<app-login></app-login>
+<ng-template #loginTemplate>
+    <router-outlet></router-outlet>
+  </ng-template>
+
