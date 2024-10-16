@@ -9,7 +9,8 @@ import { EmpInterfaces } from '../../interfaces/empleados.interfaces';
 import { EmpleadosService } from '../../services/empleados.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { AuthService } from '../../services/auth.service';
+import { usuario } from '../../interfaces/clientes.intergaces';
 @Component({
   selector: 'app-empleados',
   standalone: true,
@@ -22,6 +23,7 @@ export class EmpleadosComponent implements OnInit {
   empleado: EmpInterfaces | undefined;
   empleadoEditando: EmpInterfaces | null = null;
   editando: boolean = false;
+  password: string= null
   nuevoEmpleado: EmpInterfaces = {
     id: 0,
 
@@ -35,11 +37,17 @@ export class EmpleadosComponent implements OnInit {
     area_id: '',
     status: '',
   };
+  EmpUsuario: usuario = {
+    name: '',
+    email: '',
+    password: '',
+  }
   mostrarFormulario: boolean = false; // Variable para controlar la visibilidad del formulario
 
   constructor(
     private empService: EmpleadosService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -97,12 +105,16 @@ export class EmpleadosComponent implements OnInit {
     });
   }
   crearEmpleado(): void {
+    this.EmpUsuario.email = this.nuevoEmpleado.email
+    this.EmpUsuario.password = this.password
     this.empService.createEmpleado(this.nuevoEmpleado).subscribe({
       next: (result) => {
+        this.authService.signInWithEmailandPassword(this.EmpUsuario)
         console.log('Empleado creado:', result);
         this.getEmpleados();
         this.mostrarFormulario = false;
         this.resetFormulario();
+        this.password = '';
       },
       error: (err) => {
         console.log('Error al crear el empleado:', err);
@@ -127,6 +139,11 @@ export class EmpleadosComponent implements OnInit {
       area_id: '',
       status: '',
     };
+    this.EmpUsuario={
+      name: '',
+      email: '',
+      password: '',
+    }
     this.editando = false;
   }
 

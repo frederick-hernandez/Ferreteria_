@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -9,7 +9,11 @@ import {
 } from '@angular/forms';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { usuario } from '../../interfaces/clientes.intergaces';
+import { listaclientes, usuario } from '../../interfaces/clientes.intergaces';
+import { ClientesComponent } from '../clientes/clientes.component';
+import { ClientesService } from '../../services/clientes.service';
+import { EmpleadosService } from '../../services/empleados.service';
+import { EmpInterfaces } from '../../interfaces/empleados.interfaces';
 
 @Component({
   selector: 'app-login',
@@ -24,9 +28,23 @@ import { usuario } from '../../interfaces/clientes.intergaces';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
+  EmpList: EmpInterfaces[] = [];
+  clientList: listaclientes[] = [];
   fservice = inject(AuthService);
-  constructor(private _router: Router) {}
+  userEmail: string = null
+  constructor(private _router: Router, private clientService: ClientesService, private EmpleService: EmpleadosService) {}
+  ngOnInit(): void {
+    this.clientService.getClientes().subscribe((res) => {
+      this.clientList = res.clientes;
+      console.log(this.clientList);
+    });
+    this.EmpleService.getEmpleados().subscribe((res) => {
+      this.EmpList = res;
+      console.log(this.EmpList);
+    });
+
+  }
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
@@ -37,9 +55,16 @@ export class LoginComponent {
     if (this.form.valid) {
       this.fservice
         .logIngWithEmailAndPassword(this.form.value as usuario)
-        .then((response) => {
+        .then(async (response) => {
           console.log('login exitoso', response);
-          this._router.navigateByUrl('/');
+          this.userEmail = await this.fservice.getCurrentUserEmail();
+          
+          if(this.EmpList.find(e => e.email == this.userEmail)){
+              this._router.navigateByUrl('/clientes')
+          }
+          else if(this.clientList.find(e => e.email == this.userEmail)){
+            this._router.navigateByUrl('/')
+          }
         });
     }
   }

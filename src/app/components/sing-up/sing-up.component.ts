@@ -37,7 +37,7 @@ export class SingUpComponent {
         .signInWithEmailandPassword(this.form.value as usuario)
         .then((response) => {
           console.log('creacion de usuario exitoso', response);
-          this._router.navigateByUrl('/');
+          this._router.navigateByUrl('/auth/crearusuario');
         });
     }
   }

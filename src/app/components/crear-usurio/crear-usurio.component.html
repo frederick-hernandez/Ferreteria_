@@ -1,1 +1,33 @@
-<p>crear-usurio works!</p>
+
+<div class="container my-5">
+
+  <form (ngSubmit)="onSubmit()">
+    <div>
+      <label for="nombre">Nombre:</label>
+      <input id="nombre" [(ngModel)]="CrearUsurio.nombre" name="nombre" required>
+    </div>
+    <div>
+      <label for="telefono1">Teléfono 1:</label>
+      <input id="telefono1" [(ngModel)]="CrearUsurio.telefono" name="telefono1" required>
+    </div>
+    <div>
+      <label for="calle">Calle:</label>
+      <input id="calle" [(ngModel)]="CrearUsurio.calle" name="calle" required>
+    </div>
+    <div>
+      <label for="numero">Número:</label>
+      <input id="numero" [(ngModel)]="CrearUsurio.numero" name="numero" required>
+    </div>
+    <div>
+      <label for="comuna">Comuna:</label>
+      <input id="comuna" [(ngModel)]="CrearUsurio.comuna" name="comuna" required>
+    </div>
+    <div>
+      <label for="ciudad">Ciudad:</label>
+      <input id="ciudad" [(ngModel)]="CrearUsurio.ciudad" name="ciudad" required>
+    </div>
+    <button class="btn btn-secondary" type="submit">Enviar</button>
+  </form>
+</div>
+
+  

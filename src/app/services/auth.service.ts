@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { usuario } from '../interfaces/clientes.intergaces';
-import {getAuth,GoogleAuthProvider,signInWithEmailAndPassword , createUserWithEmailAndPassword, updateProfile,sendPasswordResetEmail, User, onAuthStateChanged} from 'firebase/auth';
+import {getAuth,GoogleAuthProvider,signInWithEmailAndPassword , createUserWithEmailAndPassword, updateProfile,sendPasswordResetEmail, User, onAuthStateChanged, deleteUser} from 'firebase/auth';
 import { Observable, observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
@@ -40,5 +40,10 @@ loginwithgoogleaccount(){
 logout(){
   return this.auth.signOut();
 }
+
+  async getCurrentUserEmail(): Promise<string | null> {
+  const user = this.auth.currentUser;
+  return Promise.resolve(user ? (await user).email : null);
 }
 
+}

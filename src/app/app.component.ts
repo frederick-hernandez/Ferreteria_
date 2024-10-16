@@ -21,4 +21,5 @@ export class AppComponent {
   fservice = inject(AuthService);
 
   user$ = this.fservice.estadoauth$
+
 }

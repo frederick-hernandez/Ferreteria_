@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -11,9 +11,10 @@ import { AuthService } from '../../services/auth.service';
 })
 export class BarraLateralComponent {
 
-  constructor(private authService: AuthService) {}
-
-  logout() {
-    this.authService.logout();
+  constructor(private authService: AuthService, private _router:Router) {}
+  async logout() {
+    await this.authService.logout();
+    this._router.navigateByUrl('auth/login');
   }
+
 }
