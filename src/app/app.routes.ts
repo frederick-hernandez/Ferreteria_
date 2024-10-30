@@ -13,7 +13,7 @@ import { authguardGuard, Puclicguard } from './guards/authguard.guard';
 export const routes: Routes = [
     { path: 'home', component: BarraLateralComponent , canActivate: [authguardGuard]},
     {path :'',
-        canActivate:[],
+        canActivate:[authguardGuard],
         children:
         [
             {
