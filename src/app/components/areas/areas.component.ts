@@ -20,7 +20,6 @@ export class AreasComponent implements OnInit {
     nombre_area: '',
     porcentaje_comision: ''
   };
-  areaEditando: AreaInterfaces | null = null;
 
   constructor(private areaService: AreaService) {}
 
@@ -83,6 +82,7 @@ export class AreasComponent implements OnInit {
   toggleFormulario(): void {
     console.log('adasda');
     this.mostrarFormulario = !this.mostrarFormulario;
+    this.resetFormulario();
   }
 
   resetFormulario(): void {
@@ -91,6 +91,8 @@ export class AreasComponent implements OnInit {
       nombre_area: '',
       porcentaje_comision: ''
     };
+    this.editando = false;
+    
   }
   trackByIndex(index: number, item: any): any {
     return index;

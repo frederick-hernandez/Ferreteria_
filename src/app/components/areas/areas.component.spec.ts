@@ -9,7 +9,7 @@ describe('AreasComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AreasComponent,MatTableModule]
+      imports: [AreasComponent]
     })
     .compileComponents();
 

@@ -5,7 +5,7 @@ import { MatTableModule } from '@angular/material/table';
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent, MatTableModule],
+      imports: [AppComponent, MatTableModule, ],
     }).compileComponents();
   });
 

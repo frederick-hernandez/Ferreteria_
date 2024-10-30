@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BarraLateralComponent } from './barra-lateral.component';
+import { CrearUsurioComponent } from './crear-usurio.component';
 
-describe('BarraLateralComponent', () => {
-  let component: BarraLateralComponent;
-  let fixture: ComponentFixture<BarraLateralComponent>;
+describe('CrearUsurioComponent', () => {
+  let component: CrearUsurioComponent;
+  let fixture: ComponentFixture<CrearUsurioComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BarraLateralComponent]
+      imports: [CrearUsurioComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(BarraLateralComponent);
+    fixture = TestBed.createComponent(CrearUsurioComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -20,6 +20,4 @@ describe('BarraLateralComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  
 });

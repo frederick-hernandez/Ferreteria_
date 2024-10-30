@@ -1,0 +1,80 @@
+<div class="container my-5">
+    <h1 class="text-center mb-4 text-primary">Lista de Productos</h1>
+    <div class="table-responsive">
+      <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand">Buscar area</a>
+          <form class="d-flex">
+            <input #buscarId class="form-control me-2" type="number" placeholder="Buscar por ID" aria-label="Buscar por ID">
+            <button class="btn btn-outline-success" type="submit">Buscar</button>
+          </form>
+        </div>
+      </nav>
+      <table class="table table-hover table-bordered shadow-sm">
+        <style>
+         img { width: 100px; height: auto; }
+        </style>
+        <thead class="table-primary">
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">nombre</th>
+            <th scope="col">descripcion</th>
+            <th scope="col">precio</th>
+            <th scope="col">categoria</th>
+            <th scope="col">proveedor_i</th>
+            <th scope="col">imagen</th> 
+            <th scope="col">acciones</th> 
+          </tr>
+        <tbody>
+          <tr *ngFor="let item of productos; trackBy: trackByIndex">
+            <th scope="row">{{ item.id }}</th>
+            <td>{{ item.title }}</td>
+            <td>{{item.description}}</td>
+            <td>{{item.price}}</td>
+            <td>{{item.category}}</td>
+            <td>{{item.proveedor_id}}</td>
+            <td><img [src]="item.image" alt="Imagen"></td>
+            <td>
+              <button class="btn btn-secondary" (click)="editarProducto(item.id,item)" >Editar</button>
+            <button class="btn btn-danger"  (click)="eliminarProducto(item.id)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-primary" (click)="toggleFormulario()">agregar Producto</button>
+    </div>
+
+    <div class="floating-form" *ngIf="mostrarFormulario">
+      <h2 *ngIf="editando==false">Crear producto</h2>
+      <h2 *ngIf="editando">Editar Producto</h2>
+      <form (ngSubmit)="guardarProducto()">
+        <div class="mb-3">
+          <label for="title" class="form-label">nombre</label>
+          <input type="text" class="form-control" id="title" [(ngModel)]="prueba.title" name="title" required>
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">descripcion</label>
+          <input type="text" class="form-control" id="porcentaje_comision" [(ngModel)]="prueba.description" name="description" required>
+        </div>
+        <div class="mb-3">
+          <label for="proveedor_id" class="form-label">proveedor_id</label>
+          <input type="number" class="form-control" id="proveedor_id "[(ngModel)]="prueba.proveedor_id" name="proveedor_id" required>
+        </div>
+        <div class="mb-3">
+          <label for="price" class="form-label">precio</label>
+          <input type="number" class="form-control" id="price "[(ngModel)]="prueba.price" name="price" required>
+        </div>
+        <div class="mb-3">
+          <label for="category" class="form-label">categoria</label>
+          <input type="text" class="form-control" id="category"[(ngModel)]="prueba.category" name="category" required>
+        </div>
+        <div class="mb-3">
+          <label for="image" class="form-label">imagen</label>
+          <input type="text" class="form-control" id="image" [(ngModel)]="prueba.image" name="image" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="button" class="btn btn-secondary" (click)="toggleFormulario()">Cerrar</button>
+      </form>
+    </div>
+
+    </div>
