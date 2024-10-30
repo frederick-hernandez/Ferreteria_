@@ -11,7 +11,7 @@ export class ProductosService {
   private apiUrl = 'https://ferreteria-api.onrender.com/api/v6/productos';
   constructor(private http:HttpClient) { }
   getProductos(): Observable<any> {
-    return this.http.get<any>(this.apiUrl+'/findall');
+    return this.http.get<any>(this.apiUrl+'/findP');
   }
   crearProductos(producto:ProductosSinId): Observable<ProductosSinId>{
     return this.http.post<ProductosSinId>(this.apiUrl+'/create',producto);

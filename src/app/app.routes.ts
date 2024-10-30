@@ -11,9 +11,9 @@ import { CrearUsurioComponent } from './components/crear-usurio/crear-usurio.com
 import { authguardGuard, Puclicguard } from './guards/authguard.guard';
 
 export const routes: Routes = [
-    { path: 'home', component: BarraLateralComponent },
+    { path: 'home', component: BarraLateralComponent , canActivate: [authguardGuard]},
     {path :'',
-        canActivate:[authguardGuard],
+        canActivate:[],
         children:
         [
             {

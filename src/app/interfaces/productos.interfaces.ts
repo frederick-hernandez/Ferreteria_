@@ -1,15 +1,17 @@
 export interface ProductosInterface{
     id: number;
-    nombre: string;
-    precio_actual: number;
-    stock: number;
+    title: string;
+    description: string;
     proveedor_id: number;
-    precio_costo: number;
+    price:number;
+    category: string;
+    image: string;
 }
 export interface ProductosSinId{
-    nombre: string;
-    precio_actual: number;
-    stock: number;
+    title: string;
+    description: string;
     proveedor_id: number;
-    precio_costo: number;
+    price:number;
+    category: string;
+    image: string;
 }

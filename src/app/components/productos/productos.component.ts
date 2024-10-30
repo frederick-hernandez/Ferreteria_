@@ -15,14 +15,14 @@ export class ProductosComponent implements OnInit {
   editando: boolean = false;
   mostrarFormulario: boolean = false;
   productos: ProductosInterface[] = [];
-  nuevoProducto: ProductosSinId= {
-    nombre: '',
-    precio_actual: 0,
-    stock: 0,
+  prueba: ProductosSinId= {
+    title: '',
+    price: 0,
+    description: '',
     proveedor_id: 0,
-    precio_costo: 0
+    image: '',
+    category: ''
   };
-
   constructor(private Pservice: ProductosService) { }
   ngOnInit(): void {
     this.getProductos();
@@ -39,7 +39,7 @@ export class ProductosComponent implements OnInit {
     this.Pservice.getProductos().subscribe({
       next: (result) => {
         console.log('Respuesta completa:', result);
-        this.productos = result.Productos;
+        this.productos = result;
         console.log('Productos:', this.productos);
       },
       error: (err) => {
@@ -49,20 +49,18 @@ export class ProductosComponent implements OnInit {
   }
 
   crearProducto(): void {
-    this.toggleFormulario();
-    this.Pservice.crearProductos(this.nuevoProducto).subscribe(() => {
+    this.Pservice.crearProductos(this.prueba).subscribe(() => {
       this.getProductos();
       this.resetFormulario();
-      console.log('Productos created', this.nuevoProducto);
       this.mostrarFormulario = false
 
     });
   }
   editarProducto(id:number, prod:ProductosSinId): void {
     this.toggleFormulario();
-    this.nuevoProducto={...prod}
+    this.prueba={...prod}
     this.id=id;
-    console.log("Editando Area"+ this.nuevoProducto);
+    console.log(this.prueba);
     this.editando = true;
   }
 
@@ -77,8 +75,8 @@ export class ProductosComponent implements OnInit {
 
   actualizarProducto(): void {
     const id = this.id;
-    if (this.nuevoProducto) {
-      this.Pservice.updateEmpleado(id,this.nuevoProducto).subscribe(() => {
+    if (this.prueba) {
+      this.Pservice.updateEmpleado(id,this.prueba).subscribe(() => {
         this.getProductos();
         this.resetFormulario();
         this.mostrarFormulario==false;
@@ -93,12 +91,13 @@ export class ProductosComponent implements OnInit {
   }
 
   resetFormulario() {
-    this.nuevoProducto = {
-      nombre: '',
-      precio_actual: 0,
-      stock: 0,
+    this.prueba = {
+      title: '',
+      price: 0,
+      description: '',
       proveedor_id: 0,
-      precio_costo: 0
+      image: '',
+      category: ''
     };
     this.editando = false;
   }

@@ -29,7 +29,6 @@ export class EmpleadosComponent implements OnInit {
 
     nombre: '',
     apellido: '',
-
     direccion: '',
     telefono: '',
     salario: 0,

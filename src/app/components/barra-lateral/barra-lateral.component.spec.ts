@@ -20,4 +20,6 @@ describe('BarraLateralComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  
 });
